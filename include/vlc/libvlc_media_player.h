@@ -2175,6 +2175,16 @@ LIBVLC_API int libvlc_media_player_set_role(libvlc_media_player_t *p_mi,
 
 /** @} audio */
 
+typedef void (*libvlc_hello_greet_cb)(void* opaque, const char* name);
+
+typedef void (*libvlc_hello_peaks_cb)(void* opaque, int64_t pts, int channels, float *min, float *max);
+
+LIBVLC_API
+int libvlc_media_player_set_hello_callbacks( libvlc_media_player_t *mp,
+        libvlc_hello_greet_cb greet_cb,
+        libvlc_hello_peaks_cb peaks_cb,
+        void* opaque );
+
 /** @} media_player */
 
 # ifdef __cplusplus

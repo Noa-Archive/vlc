@@ -734,6 +734,11 @@ libvlc_media_player_new( libvlc_instance_t *instance )
     var_Create (mp, "equalizer-vlcfreqs", VLC_VAR_BOOL);
     var_Create (mp, "equalizer-bands", VLC_VAR_STRING);
 
+    /* Custom Filter Properties */
+    var_Create (mp, "noa-hello-cb-opaque", VLC_VAR_ADDRESS);
+    var_Create (mp, "noa-hello-cb-greet", VLC_VAR_ADDRESS);
+    var_Create (mp, "noa-hello-cb-peaks", VLC_VAR_ADDRESS);
+
     /* Initialize the shared HTTP cookie jar */
     vlc_value_t cookies;
     cookies.p_address = vlc_http_cookies_new();
@@ -2047,4 +2052,18 @@ int libvlc_media_player_get_role(libvlc_media_player_t *mp)
 
     free(str);
     return ret;
+}
+
+/**************************************************************************
+ * Custom functions
+ **************************************************************************/
+
+int libvlc_media_player_set_hello_callbacks( libvlc_media_player_t *mp,
+        libvlc_hello_greet_cb greet_cb, libvlc_hello_peaks_cb peaks_cb, 
+        void* opaque )
+{
+    var_SetAddress( mp, "noa-hello-cb-opaque", opaque );
+    var_SetAddress( mp, "noa-hello-cb-greet", greet_cb );
+    var_SetAddress( mp, "noa-hello-cb-peaks", peaks_cb );
+    return 1;
 }

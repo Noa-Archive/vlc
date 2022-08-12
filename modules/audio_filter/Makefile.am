@@ -10,6 +10,7 @@ libequalizer_plugin_la_SOURCES = audio_filter/equalizer.c \
 	audio_filter/equalizer_presets.h
 libequalizer_plugin_la_LIBADD = $(LIBM)
 libkaraoke_plugin_la_SOURCES = audio_filter/karaoke.c
+libnoa_hello_plugin_la_SOURCES = audio_filter/noa_hello.c
 libnormvol_plugin_la_SOURCES = audio_filter/normvol.c
 libnormvol_plugin_la_LIBADD = $(LIBM)
 libgain_plugin_la_SOURCES = audio_filter/gain.c
@@ -40,6 +41,7 @@ audio_filter_LTLIBRARIES = \
 	libcompressor_plugin.la \
 	libequalizer_plugin.la \
 	libkaraoke_plugin.la \
+	libnoa_hello_plugin.la \
 	libnormvol_plugin.la \
 	libgain_plugin.la \
 	libparam_eq_plugin.la \
