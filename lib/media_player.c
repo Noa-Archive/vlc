@@ -709,7 +709,7 @@ libvlc_media_player_new( libvlc_instance_t *instance )
     var_Create (mp, "mute", VLC_VAR_BOOL);
     var_Create (mp, "volume", VLC_VAR_FLOAT);
     var_Create (mp, "corks", VLC_VAR_INTEGER);
-    var_Create (mp, "audio-filter", VLC_VAR_STRING);
+    var_Create (mp, "audio-filter", VLC_VAR_STRING | VLC_VAR_DOINHERIT);
     var_Create (mp, "role", VLC_VAR_STRING | VLC_VAR_DOINHERIT);
     var_Create (mp, "amem-data", VLC_VAR_ADDRESS);
     var_Create (mp, "amem-setup", VLC_VAR_ADDRESS);

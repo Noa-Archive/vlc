@@ -591,6 +591,7 @@ aout_filters_t *aout_FiltersNew(vlc_object_t *obj,
 
     /* Now add user filters */
     char *str = var_InheritString (obj, "audio-filter");
+    msg_Info(obj, "Loading user-defined audio filters \"%s\"", str);
     if (str != NULL)
     {
         char *p = str, *name;
