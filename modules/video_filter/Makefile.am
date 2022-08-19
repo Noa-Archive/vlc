@@ -37,6 +37,8 @@ libmagnify_plugin_la_SOURCES = video_filter/magnify.c
 libmirror_plugin_la_SOURCES = video_filter/mirror.c
 libmotionblur_plugin_la_SOURCES = video_filter/motionblur.c
 libmotiondetect_plugin_la_SOURCES = video_filter/motiondetect.c
+libnoa_invert_plugin_la_SOURCES = video_filter/noa_invert.c
+libnoa_vsummary_plugin_la_SOURCES = video_filter/noa_vsummary.c
 liboldmovie_plugin_la_SOURCES = video_filter/oldmovie.c
 liboldmovie_plugin_la_LIBADD = $(LIBM)
 libposterize_plugin_la_SOURCES = video_filter/posterize.c
@@ -87,6 +89,8 @@ video_filter_LTLIBRARIES = \
 	libmirror_plugin.la \
 	libmotionblur_plugin.la \
 	libmotiondetect_plugin.la \
+	libnoa_invert_plugin.la \
+	libnoa_vsummary_plugin.la \
 	libposterize_plugin.la \
 	libpsychedelic_plugin.la \
 	libripple_plugin.la \

@@ -738,6 +738,11 @@ libvlc_media_player_new( libvlc_instance_t *instance )
     var_Create (mp, "noa-hello-cb-opaque", VLC_VAR_ADDRESS);
     var_Create (mp, "noa-hello-cb-greet", VLC_VAR_ADDRESS);
     var_Create (mp, "noa-hello-cb-peaks", VLC_VAR_ADDRESS);
+    var_Create (mp, "noa-vsummary-chroma", VLC_VAR_STRING);
+    var_Create (mp, "noa-vsummary-width", VLC_VAR_INTEGER);
+    var_Create (mp, "noa-vsummary-height", VLC_VAR_INTEGER);
+    var_Create (mp, "noa-vsummary-cb-opaque", VLC_VAR_ADDRESS);
+    var_Create (mp, "noa-vsummary-cb-picture", VLC_VAR_ADDRESS);
 
     /* Initialize the shared HTTP cookie jar */
     vlc_value_t cookies;
@@ -2058,12 +2063,36 @@ int libvlc_media_player_get_role(libvlc_media_player_t *mp)
  * Custom functions
  **************************************************************************/
 
-int libvlc_media_player_set_hello_callbacks( libvlc_media_player_t *mp,
-        libvlc_hello_greet_cb greet_cb, libvlc_hello_peaks_cb peaks_cb, 
+void libvlc_media_player_set_hello_callbacks( libvlc_media_player_t *mp,
+        libvlc_hello_greet_cb greet_cb, libvlc_hello_peaks_cb peaks_cb,
         void* opaque )
 {
     var_SetAddress( mp, "noa-hello-cb-opaque", opaque );
     var_SetAddress( mp, "noa-hello-cb-greet", greet_cb );
     var_SetAddress( mp, "noa-hello-cb-peaks", peaks_cb );
+}
+
+int libvlc_media_player_set_vsummary_format( libvlc_media_player_t *mp,
+        const char *chroma, unsigned width, unsigned height )
+{
+    vlc_fourcc_t i_chroma;
+
+    // verify chroma string
+    i_chroma = vlc_fourcc_GetCodecFromString(VIDEO_ES, chroma);
+    if (!i_chroma) {
+        return 0;
+    }
+
+    var_SetString( mp, "noa-vsummary-chroma", chroma );
+    var_SetInteger( mp, "noa-vsummary-width", width );
+    var_SetInteger( mp, "noa-vsummary-height", height );
     return 1;
+}
+
+void libvlc_media_player_set_vsummary_callback( libvlc_media_player_t *mp,
+        libvlc_vsummary_picture_cb picture_cb,
+        void* opaque )
+{
+    var_SetAddress( mp, "noa-vsummary-cb-opaque", opaque );
+    var_SetAddress( mp, "noa-vsummary-cb-picture", picture_cb );
 }

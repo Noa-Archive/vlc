@@ -2180,9 +2180,21 @@ typedef void (*libvlc_hello_greet_cb)(void* opaque, const char* name);
 typedef void (*libvlc_hello_peaks_cb)(void* opaque, int64_t pts, int channels, float *min, float *max);
 
 LIBVLC_API
-int libvlc_media_player_set_hello_callbacks( libvlc_media_player_t *mp,
+void libvlc_media_player_set_hello_callbacks( libvlc_media_player_t *mp,
         libvlc_hello_greet_cb greet_cb,
         libvlc_hello_peaks_cb peaks_cb,
+        void* opaque );
+
+LIBVLC_API
+int libvlc_media_player_set_vsummary_format( libvlc_media_player_t *p_mi,
+        const char* chroma, unsigned width, unsigned height );
+
+typedef void (*libvlc_vsummary_picture_cb)(void* opaque, int64_t pts,
+        int planes, uint8_t **pixels, int *lines, int *widths, int *pitches);
+
+LIBVLC_API
+void libvlc_media_player_set_vsummary_callback( libvlc_media_player_t *p_mi,
+        libvlc_vsummary_picture_cb picture_cb,
         void* opaque );
 
 /** @} media_player */
